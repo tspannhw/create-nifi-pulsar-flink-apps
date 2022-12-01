@@ -1,0 +1,34 @@
+version: '1.0'
+services:
+  pulsar:
+    image: apachepulsar/pulsar:2.10.2
+    command: "bin/pulsar standalone"
+    restart: unless-stopped
+    container_name: "pulsar"
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+  nifi:
+    image: apachenifi/nifi:1.19.0
+    command: "bin/nifi.sh start"
+    container_name: "nifi"
+    volumes:
+      # mkdir /var/lib/nifi && chown -R 1000:1000 /var/lib/nifi
+      - /var/lib/nifi/database_repository:/opt/nifi/nifi-current/database_repository
+      - /var/lib/nifi/flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
+      - /var/lib/nifi/content_repository:/opt/nifi/nifi-current/content_repository
+      - /var/lib/nifi/provenance_repository:/opt/nifi/nifi-current/provenance_repository
+      - /var/lib/nifi/state:/opt/nifi/nifi-current/state
+      - /var/lib/nifi/logs:/opt/nifi/nifi-current/logs
+      - ./config:/config
+      - ./plugins/pinot-pulsar-0.10.0-shaded.jar:/opt/pinot/plugins/pinot-stream-ingestion/pinot-pulsar/pinot-pulsar-0.10.0-shaded.jar
+  restart: unless-stopped
+    ports:
+      - "8881:8881"
+  flink:
+    image: apacheflink/flink:0.10.0
+    command: "StartBroker -zkAddress zookeeper-pulsar:2181"
+    restart: unless-stopped
+    container_name: "flink"
+    ports:
+      - "8081:8081"
