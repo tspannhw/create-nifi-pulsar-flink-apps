@@ -32,3 +32,36 @@ services:
     container_name: "flink"
     ports:
       - "8081:8081"
+    environment:
+      
+      ########## JVM ##########
+      
+      # -Xms
+      #   The initial JVM heap size.
+      #NIFI_JVM_HEAP_INIT: 512m
+
+      # -Xmx
+      #   The maximum JVM heap size.
+      #NIFI_JVM_HEAP_MAX: 512m
+      
+      # -Xdebug
+      #   The JVM Debugger can be enabled by setting this environment variable to any value.
+      #NIFI_JVM_DEBUGGER: ''
+
+
+
+      ########## Web ##########
+
+      # nifi.web.http.host
+      NIFI_WEB_HTTP_HOST: '0.0.0.0'
+      
+      # nifi.web.http.port
+      #   HTTP Port
+      NIFI_WEB_HTTP_PORT: 8080
+
+      # nifi.web.https.host
+      #NIFI_WEB_HTTPS_HOST: '0.0.0.0'
+      
+      # nifi.web.https.port
+      #   HTTPS Port
+      #NIFI_WEB_HTTP_PORT: 8443
