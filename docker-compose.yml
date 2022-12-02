@@ -18,16 +18,12 @@ services:
       systemTopicEnabled: "true"
       topicLevelPoliciesEnabled: "true"
       transactionCoordinatorEnabled: "true"
-    networks:
-      - webnet
   flink:
     image: streamnative/pulsar-flink:1.15.0.1
     container_name: Flink
     command: /bin/bash
     depends_on:
       - pulsar
-    networks:
-      - webnet
   nifi:
     build:
       context: ./nifi
@@ -37,10 +33,6 @@ services:
     privileged: true
     restart: always
     ports:
-      - 9090:9090
+      - "9090:9090"
     environment:
       NIFI_WEB_HTTP_PORT: 9090
-    networks:
-      - webnet
-networks:
-  webnet:
