@@ -32,9 +32,3 @@ services:
       - NIFI_REMOTE_INPUT_HOST=nifi
     ports:
       - 9999:9999
-  flink:
-    image: streamnative/pulsar-flink:1.15.0.1
-    container_name: Flink
-    user: root
-    privileged: true
-    command: /bin/bash
