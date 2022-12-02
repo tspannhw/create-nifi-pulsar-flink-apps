@@ -37,3 +37,4 @@ SHOW TABLES;
 #### References
 
 * https://github.com/streamnative/flink-example/blob/main/sql-examples/sql-example.md
+* https://github.com/noharm-ai/nifi-docker
