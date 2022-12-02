@@ -16,6 +16,30 @@ I want to analyze Bike Status Data (or any REST Data Point)
 
 ````
 
+#### One Parsed JSON Record
+
+````
+{
+  "num_docks_disabled" : 0,
+  "eightd_has_available_keys" : false,
+  "station_status" : "active",
+  "last_reported" : 1670008651,
+  "is_installed" : 1,
+  "num_ebikes_available" : 0,
+  "num_bikes_available" : 5,
+  "station_id" : "72",
+  "is_renting" : 1,
+  "is_returning" : 1,
+  "num_docks_available" : 46,
+  "num_bikes_disabled" : 1,
+  "legacy_id" : "72",
+  "valet" : null,
+  "eightd_active_station_services" : null,
+  "ts" : "1670009185951",
+  "uuid" : "b85b742c-a33e-452b-9f86-9136b140ecb4"
+}
+````
+
 #### Run
 
 Cloned From:   https://github.com/streamnative/flink-example/blob/main/sql-examples/sql-example.md
@@ -92,6 +116,64 @@ USE CATALOG pulsar;
 USE `public/default`;
 SHOW TABLES;
 
+CREATE DATABASE sql_examples;
+
+USE sql_examples;
+
+CREATE TABLE citibikenyc (
+	num_docks_disabled DOUBLE,
+	eightd_has_available_keys STRING,
+	station_status STRING,
+	last_reported DOUBLE,
+	is_installed DOUBLE,
+	num_ebikes_available DOUBLE,
+	num_bikes_available DOUBLE,
+	station_id DOUBLE,
+	is_renting DOUBLE,
+	is_returning DOUBLE,
+	num_docks_available DOUBLE,
+	num_bikes_disabled DOUBLE,
+	legacy_id DOUBLE,
+	valet STRING,
+	eightd_active_station_services STRING,
+	ts DOUBLE,
+	uuid STRING
+) WITH (
+  'connector' = 'pulsar',
+  'topics' = 'persistent://public/default/citibikenyc',
+  'format' = 'json'
+);
+
+
+SHOW TABLES;
+
+desc citibikenyc;
++--------------------------------+--------+------+-----+--------+-----------+
+|                           name |   type | null | key | extras | watermark |
++--------------------------------+--------+------+-----+--------+-----------+
+|             num_docks_disabled | DOUBLE | TRUE |     |        |           |
+|      eightd_has_available_keys | STRING | TRUE |     |        |           |
+|                 station_status | STRING | TRUE |     |        |           |
+|                  last_reported | DOUBLE | TRUE |     |        |           |
+|                   is_installed | DOUBLE | TRUE |     |        |           |
+|           num_ebikes_available | DOUBLE | TRUE |     |        |           |
+|            num_bikes_available | DOUBLE | TRUE |     |        |           |
+|                     station_id | DOUBLE | TRUE |     |        |           |
+|                     is_renting | DOUBLE | TRUE |     |        |           |
+|                   is_returning | DOUBLE | TRUE |     |        |           |
+|            num_docks_available | DOUBLE | TRUE |     |        |           |
+|             num_bikes_disabled | DOUBLE | TRUE |     |        |           |
+|                      legacy_id | DOUBLE | TRUE |     |        |           |
+|                          valet | STRING | TRUE |     |        |           |
+| eightd_active_station_services | STRING | TRUE |     |        |           |
+|                             ts | DOUBLE | TRUE |     |        |           |
+|                           uuid | STRING | TRUE |     |        |           |
++--------------------------------+--------+------+-----+--------+-----------+
+17 rows in set
+
+show create table citibikenyc;
+
+select * from citibikenyc;
 
 ````
 
