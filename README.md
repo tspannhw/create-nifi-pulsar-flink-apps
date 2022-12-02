@@ -2,6 +2,12 @@
 
 How to create a real-time scalable streaming app using Apache NiFi, Apache Pulsar and Apache Flink SQL
 
+#### Use Case
+
+I want to analyze Bike Status Data (or any REST Data Point)
+
+https://gbfs.citibikenyc.com/gbfs/en/station_status.json
+
 #### Run
 
 Cloned From:   https://github.com/streamnative/flink-example/blob/main/sql-examples/sql-example.md
