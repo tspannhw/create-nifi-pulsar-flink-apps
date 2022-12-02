@@ -30,10 +30,9 @@ services:
     user: root
     privileged: true
     restart: always
-    network_mode: bridge
     command: ["bin/nifi.sh start"]
     ports:
-      - "8881:8881"
+      - "127.0.0.1:8881:8881" 
     environment:
       NIFI_WEB_HTTP_HOST: 0.0.0.0      
       NIFI_WEB_HTTP_PORT: 8881
