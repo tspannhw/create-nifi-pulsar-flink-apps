@@ -1,8 +1,9 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.nar
 *$py.class
-
+docker/data/
 # C extensions
 *.so
 
