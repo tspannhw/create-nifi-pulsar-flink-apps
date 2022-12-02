@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
     command: ["bin/nifi.sh start"]
     ports:
-      - "8081:8081"
+      - "8881:8881"
     environment:
       NIFI_WEB_HTTP_HOST: '0.0.0.0'      
-      NIFI_WEB_HTTP_PORT: 8080
+      NIFI_WEB_HTTP_PORT: 8881
