@@ -2,13 +2,26 @@
 
 How to create a real-time scalable streaming app using Apache NiFi, Apache Pulsar and Apache Flink SQL
 
+#### Example Architecture
+
+![example](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/genericdiagram.png)
+
 #### Use Case
 
 I want to analyze Bike Status Data (or any REST Data Point)
 
 * https://gbfs.citibikenyc.com/gbfs/en/station_status.json
 
+![citi](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/citibikediagram.png)
+
+#### Setting Up Docker
+
+![docker](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/myServersInDockerDesktop.jpg)
+
+
 #### Raw Data
+
+![](https://github.com/tspannhw/create-nifi-pulsar-flink-apps/raw/main/images/rawJson.jpg)
 
 ````
 "data":{"stations":[{"num_docks_available":33,"num_bikes_disabled":1,"num_bikes_available":18,"is_installed":1,"last_reported":1669990948,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"72","is_returning":1,"station_status":"active","num_ebikes_available":10,"station_id":"72","num_docks_disabled":0},{"num_docks_available":5,"num_bikes_disabled":3,"num_bikes_available":25,"is_installed":1,"last_reported":1669990591,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"79","is_returning":1,"station_status":"active","num_ebikes_available":5,"station_id":"79","num_docks_disabled":0},{"num_docks_available":1,"num_bikes_disabled":1,"num_bikes_available":25,"is_installed":1,"last_reported":1669990874,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"82","is_returning":1,"station_status":"active","num_ebikes_available":3,"station_id":"82","num_docks_disabled":0},{"num_docks_available":40,"num_bikes_disabled":1,"num_bikes_available":20,"is_installed":1,"last_reported":1669990997,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"83","is_returning":1,"station_status":"active","num_ebikes_available":0,"station_id":"83","num_docks_disabled":0},{"num_docks_available":9,"num_bikes_disabled":1,"num_bikes_available":63,"is_installed":1,"last_reported":1669991006,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"116","is_returning":1,"station_status":"active","num_ebikes_available":1,"station_id":"116","num_docks_disabled":0},{"num_docks_available":1,"num_bikes_disabled":0,"num_bikes_available":51,"is_installed":1,"last_reported":1669990668,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"119","is_returning":1,"station_status":"active","num_ebikes_available":0,"station_id":"119","num_docks_disabled":0},{"num_docks_available":16,"num_bikes_disabled":1,"num_bikes_available":2,"is_installed":1,"last_reported":1669991161,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"120","is_returning":1,"station_status":"active","num_ebikes_available":0,"station_id":"120","num_docks_disabled":0},{"num_docks_available":6,"num_bikes_disabled":1,"num_bikes_available":24,"is_installed":1,"last_reported":1669991026,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"127","is_returning":1,"station_status":"active","num_ebikes_available":1,"station_id":"127","num_docks_disabled":0},{"num_docks_available":0,"num_bikes_disabled":2,"num_bikes_available":54,"is_installed":1,"last_reported":1669990740,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"128","is_returning":1,"station_status":"active","num_ebikes_available":0,"station_id":"128","num_docks_disabled":0},{"num_docks_available":11,"num_bikes_disabled":0,"num_bikes_available":38,"is_installed":1,"last_reported":1669991277,"is_renting":1,"eightd_has_available_keys":false,"legacy_id":"143","is_returning":1,"station_status":"active","num_ebikes_available":15,"station_id":"143","num_docks_disabled":0}]}]
@@ -179,7 +192,35 @@ select * from citibikenyc;
 
 ````
 
+#### NiFi Flow to Ingest Data
 
+![flowtop](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/NiFiFlow1.jpg)
+
+![flowbottom](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/NiFiFlow2.jpg)
+
+![closeup2](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/NiFiCloseup2.jpg)
+
+![](https://github.com/tspannhw/create-nifi-pulsar-flink-apps/raw/main/images/Untitled.jpg)
+
+![pulsarcontrollerservice](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/PulsarControllerDetails.jpg)
+
+![configuration](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/NiFiControllerServices.jpg)
+
+![publishrecord](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/publishPulsarRecord.jpg)
+
+![provenancepush](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/ProvenanceResultsOfPulsarPush.jpg)
+
+![nifiprocessing](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/NiFiProcessorsRunning.jpg)
+
+![nificonnrunn](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/NiFiConnectionsRunning.jpg)
+
+#### Display all the Flink SQL Rows
+
+![](https://raw.githubusercontent.com/tspannhw/create-nifi-pulsar-flink-apps/main/images/flinksqlliveresults.jpg)
+
+#### Displaying a Single Flink SQL Row
+
+![](https://github.com/tspannhw/create-nifi-pulsar-flink-apps/raw/main/images/FlinkSQLRow.jpg)
 
 #### References
 
