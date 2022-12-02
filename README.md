@@ -45,14 +45,16 @@ I want to analyze Bike Status Data (or any REST Data Point)
 Cloned From:   https://github.com/streamnative/flink-example/blob/main/sql-examples/sql-example.md
 See:   https://hub.streamnative.io/data-processing/pulsar-flink/1.15.0.1/
 
+This is how to setup and run your Pulsar, NiFi and Flink clusters on your laptop.
+
 ````
 ./allstart.sh
 
-# wait 5 minutes for warm-up
+##### wait 5 minutes for warm-up
 
 ./runflink.sh
 
-### SSH into flink
+#### SSH into flink
 
 ./bin/start-cluster.sh
 
@@ -176,6 +178,8 @@ show create table citibikenyc;
 select * from citibikenyc;
 
 ````
+
+
 
 #### References
 
