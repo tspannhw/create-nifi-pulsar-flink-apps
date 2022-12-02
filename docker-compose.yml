@@ -18,12 +18,6 @@ services:
       systemTopicEnabled: "true"
       topicLevelPoliciesEnabled: "true"
       transactionCoordinatorEnabled: "true"
-  flink:
-    image: streamnative/pulsar-flink:1.15.0.1
-    container_name: Flink
-    command: /bin/bash
-    depends_on:
-      - pulsar
   nifi:
     build:
       context: ./nifi
@@ -38,3 +32,9 @@ services:
       - NIFI_REMOTE_INPUT_HOST=nifi
     ports:
       - 9999:9999
+  flink:
+    image: streamnative/pulsar-flink:1.15.0.1
+    container_name: Flink
+    user: root
+    privileged: true
+    command: /bin/bash
