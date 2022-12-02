@@ -1,7 +1,6 @@
 version: "3.7"
 services:
   pulsar:
-    platform: linux/x86_64
     image: apachepulsar/pulsar:2.10.2
     container_name: PulsarForFlink
     user: root
@@ -20,14 +19,12 @@ services:
       topicLevelPoliciesEnabled: "true"
       transactionCoordinatorEnabled: "true"
   flink:
-    platform: linux/x86_64
     image: streamnative/pulsar-flink:1.15.0.1
     container_name: Flink
     command: /bin/bash
     depends_on:
       - pulsar
   nifi:
-    platform: linux/x86_64
     build:
       context: ./nifi
       dockerfile: Dockerfile
