@@ -29,6 +29,8 @@ services:
       context: ./nifi
       dockerfile: Dockerfile
     container_name: NiFi
+    user: root
+    privileged: true
     restart: always
     environment:
       - NIFI_WEB_HTTP_HOST=nifi
